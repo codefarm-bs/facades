@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Mail\TicketMail;
+use App\Services\TicketService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->singleton('ticket', function () {
+            return new TicketService(TicketMail::class);
+        });
     }
 }

@@ -1,18 +1,21 @@
 <?php
 
+use App\Mail\TicketMail;
+use App\Services\Ticket;
+use App\Services\TicketService;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/send', function () {
 
-Route::get('/', function () {
-    return view('welcome');
+    $ticket = new TicketService(TicketMail::class);
+
+    $ticket->send('abs@abc.com', 'Hello abs, THIS IS A TICKET');
+
+});
+
+
+Route::get('/facade', function () {
+
+    Ticket::send('abs@abc.com', 'Hello abs, THIS IS A TICKET');
+
 });
